@@ -10,7 +10,7 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
 
     session = Session.where(key: request.headers['Authorization']).first
-    Rails.logger.info "Logged in as \e31m#{session&.user&.email}"
+    Rails.logger.info "Logged in as#{session&.user&.email}"
 
     context = {
       current_user: session&.user,
