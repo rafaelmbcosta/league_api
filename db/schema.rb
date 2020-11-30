@@ -18,19 +18,19 @@ ActiveRecord::Schema.define(version: 2020_11_30_132347) do
   create_table "disputes", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "season_id", null: false
-    t.boolean "finished"
+    t.boolean "finished", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["season_id"], name: "index_disputes_on_season_id"
   end
 
   create_table "rounds", force: :cascade do |t|
-    t.integer "number"
-    t.boolean "golden"
+    t.integer "number", null: false
+    t.boolean "golden", default: false, null: false
     t.bigint "season_id", null: false
-    t.boolean "finished"
-    t.bigint "dispute_id", null: false
-    t.boolean "market_closed"
+    t.boolean "finished", default: false, null: false
+    t.bigint "dispute_id"
+    t.boolean "market_closed", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["dispute_id"], name: "index_rounds_on_dispute_id"

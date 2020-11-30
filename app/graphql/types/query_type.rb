@@ -6,11 +6,22 @@ module Types
       Season.all
     end
 
-    field :active_season, SeasonType, null: true, description: "Checks if there is an active Season", camelize: false
+    field :current_season, SeasonType, null: true, description: "Checks if there is an active Season", camelize: false
 
-    def active_season
-      # Verificar a possibilidade de mudar isso para dentro do SeasonType.
+    def current_season
       Season.active
+    end
+
+    field :current_user, UserType, null: true, description: "Currently logged user", camelize: false
+
+    def current_user
+      context[:current_user]
+    end
+
+    field :disputes, [DisputeType], null: false, description: "Dispute months"
+
+    def disputes
+      Dispute.all
     end
   end
 end

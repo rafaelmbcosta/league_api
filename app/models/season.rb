@@ -1,7 +1,15 @@
 class Season < ApplicationRecord
   include Season::Active
+  include Season::CreateRounds
 
-  # def self.active
-  #   Season.find { |season| season.year == Time.now.year }
-  # end
+  has_many :rounds
+
+  before_create :set_year
+  after_create :create_rounds
+
+  validate :active_exist?
+
+  def set_year
+    self.year = Time.now.year
+  end
 end

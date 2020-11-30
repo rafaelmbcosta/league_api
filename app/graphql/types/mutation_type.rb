@@ -13,17 +13,44 @@ module Types
       end
     end
 
-    field :current_user, Types::UserType, null: true, description: "Currently logged user"
-
-    def current_user
-      context[:current_user]
-    end
-
     field :logout, Boolean, null: false
 
     def logout
       Session.where(id: context[:session_id]).destroy_all
       true
+    end
+
+    field :create_season, SeasonType, null: true, description: "Create Season", camelize: false do
+      argument :year, Integer, required: false
+    end
+
+    def create_season(year: Integer)
+      raise 'Unauthorized' if !context[:current_user]
+
+      Season.create!
+    rescue StandardError => e
+      raise e.message
+    end
+
+    field :create_dispute, DisputeType, null: false, description: "Creating Dispute", camelize: false do
+      argument :name, String, required: true
+      argument :rounds, [Integer], required: false
+    end
+
+    def create_dispute(**args)
+      season = Season.active
+      raise "Temporada precisa ser criada !" if season.nil?
+
+      dispute = nil
+      ActiveRecord::Base.transaction do
+        dispute = Dispute.create!(season: season, name: args[:name])
+        Rails.logger.info(dispute.inspect)
+        if args[:rounds]
+          collection = Round.where(id: args[:rounds])
+          collection.update_all(dispute_id: dispute.id)
+        end
+      end
+      dispute
     end
   end
 end

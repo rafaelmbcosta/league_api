@@ -3,7 +3,7 @@ class CreateDisputes < ActiveRecord::Migration[6.0]
     create_table :disputes do |t|
       t.string :name, null: false
       t.references :season, null: false, foreign_key: true
-      t.boolean :finished
+      t.boolean :finished, null: false, default: false
 
       t.timestamps
     end
