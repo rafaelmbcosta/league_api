@@ -6,7 +6,7 @@ module Types
       Season.all
     end
 
-    field :current_season, SeasonType, null: true, description: "Checks if there is an active Season", camelize: false
+    field :current_season, SeasonType, null: true, description: "Checks if there is an active Season"
 
     def current_season
       Season.active

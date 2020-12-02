@@ -6,9 +6,9 @@ module Types
       argument :finished, Boolean, required: false
     end
 
-    def self.visible?(context)
-      !!context[:current_user]
-    end
+    # def self.visible?(context)
+    #   !!context[:current_user]
+    # end
 
     def rounds(**args)
       object.rounds.where(args)
