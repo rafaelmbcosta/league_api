@@ -20,12 +20,12 @@ module Types
       true
     end
 
-    field :create_season, SeasonType, null: true, description: "Create Season", camelize: false do
+    field :create_season, SeasonType, null: true, description: "Create Season" do
       argument :year, Integer, required: false
     end
 
     def create_season(year: Integer)
-      raise 'Unauthorized' if !context[:current_user]
+      # raise 'Unauthorized' if !context[:current_user]
 
       Season.create!
     rescue StandardError => e

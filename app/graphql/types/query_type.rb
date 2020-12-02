@@ -23,5 +23,8 @@ module Types
     def disputes
       Dispute.all
     end
+
+    field :season_updated, subscription: Subscriptions::SeasonUpdated
+
   end
 end
