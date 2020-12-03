@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2020_11_30_132347) do
     t.string "name", null: false
     t.bigint "season_id", null: false
     t.boolean "finished", default: false, null: false
+    t.integer "order", null: false
+    t.integer "active", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["season_id"], name: "index_disputes_on_season_id"

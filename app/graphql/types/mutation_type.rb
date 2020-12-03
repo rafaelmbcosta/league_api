@@ -1,6 +1,5 @@
 module Types
   class MutationType < Types::BaseObject
-    # TODO: remove me
 
     field :login, String, null: true, description: 'User Login' do
       argument :email, String, required: true
@@ -32,9 +31,8 @@ module Types
       raise e.message
     end
 
-    field :create_dispute, DisputeType, null: false, description: "Creating Dispute", camelize: false do
+    field :create_dispute, DisputeType, null: false, description: "Creating Dispute" do
       argument :name, String, required: true
-      argument :rounds, [Integer], required: false
     end
 
     def create_dispute(**args)

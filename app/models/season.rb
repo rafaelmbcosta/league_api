@@ -3,6 +3,7 @@ class Season < ApplicationRecord
   include Season::CreateRounds
 
   has_many :rounds
+  has_many :disputes
 
   before_create :set_year
   after_create :create_rounds

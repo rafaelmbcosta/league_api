@@ -5,6 +5,7 @@ module Types
     field :rounds, [RoundType], null: false do
       argument :finished, Boolean, required: false
     end
+    field :disputes, [DisputeType], null: false
 
     # def self.visible?(context)
     #   !!context[:current_user]
