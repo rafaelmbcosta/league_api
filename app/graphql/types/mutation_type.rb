@@ -41,7 +41,7 @@ module Types
 
       dispute = nil
       ActiveRecord::Base.transaction do
-        dispute = Dispute.create!(season: season, name: args[:name])
+        dispute = Dispute.create!(season: season, name: args[:name], order: Dispute.next_order)
         Rails.logger.info(dispute.inspect)
         if args[:rounds]
           collection = Round.where(id: args[:rounds])
