@@ -2,6 +2,7 @@ class Dispute < ApplicationRecord
   belongs_to :season
   has_many :rounds
 
+  validates :name, presence: { message: 'Obrigatório' }
   validate :repeated_name
   validates_uniqueness_of :order
 
