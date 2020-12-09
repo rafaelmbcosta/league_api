@@ -26,5 +26,13 @@ module Types
 
     field :season_updated, subscription: Subscriptions::SeasonUpdated
 
+    field :rounds, [RoundType], null: false, description: "Round pool" do
+      argument :dispute, ID, required: false
+    end
+
+    def rounds(**args)
+      params = { season: Season.active }.merge(args)
+      Round.where(params)
+    end
   end
 end
